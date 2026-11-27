@@ -1,0 +1,267 @@
+/* Shared styles for the Microeconomics I site.
+   Look: a sheet laid over Joachim Beuckelaer's "Market in the Square" (1566):
+   madder red, ochre and walnut, Playfair Display and Crimson Pro type.
+   Every colour, width and font is defined once, here. */
+
+:root {
+    /* colours */
+    --ink: #2a211b;
+    --muted: #6b5d50;
+    --accent: #9c2f22;           /* primary accent: the market-women's madder red */
+    --accent-light: #c0442f;
+    --ochre: #c08a2c;            /* secondary accent: basket and bread ochre */
+    --bar: #3a2a1e;              /* top bar: walnut */
+    --bar-text: #f3ead9;
+    --desk: #d8cdb9;
+    --paper: #f8f2e6;
+    --card: #fffcf5;
+    --rule: #ddd0b8;
+    --backdrop-tint: rgba(40, 24, 14, 0.35);   /* darkens the painting behind the page */
+    --shadow: rgba(0, 0, 0, 0.45);
+
+    /* type */
+    --display: "Playfair Display", Georgia, serif;
+    --serif: "Crimson Pro", Georgia, "Times New Roman", serif;
+    --sans: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+    --base-size: 1.2rem;
+
+    /* geometry */
+    --page-width: 60rem;
+    --date-column: 4.5rem;
+    --sheet-pad-x: clamp(1rem, 4vw, 2.75rem);
+    --radius: 4px;
+
+    /* background painting */
+    --backdrop: url("graphics/beuckelaer-market-in-the-square.jpg");
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-padding-top: 4.5rem; }
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: var(--serif);
+    font-size: var(--base-size);
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--desk);
+}
+
+/* The painting sits in a fixed layer behind everything (background-attachment:
+   fixed is unreliable on mobile browsers). */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(var(--backdrop-tint), var(--backdrop-tint)), var(--backdrop) center / cover no-repeat;
+}
+
+a { color: var(--accent); text-underline-offset: 0.15em; }
+a:hover { color: var(--accent-light); }
+
+h1, h2, h3 { font-family: var(--display); line-height: 1.15; color: var(--ink); }
+
+/* ---------- Top navigation ---------- */
+.site-nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding: 0.75rem clamp(1rem, 4vw, 2.5rem);
+    font-family: var(--sans);
+    background: var(--bar);
+    border-bottom: 3px solid var(--ochre);
+}
+.site-nav a { color: var(--bar-text); text-decoration: none; }
+.site-nav a:hover { color: var(--ochre); }
+.site-nav .brand { font-family: var(--display); font-weight: 700; font-size: 1.2rem; letter-spacing: 0.03em; }
+.site-nav .links { display: flex; gap: clamp(0.8rem, 3vw, 1.6rem); font-size: 0.85rem; font-weight: 500; }
+
+/* ---------- The paper sheet ---------- */
+.sheet {
+    max-width: var(--page-width);
+    margin: clamp(0rem, 3vw, 2rem) auto 0;
+    padding: 0 var(--sheet-pad-x) clamp(1.5rem, 4vw, 2.75rem);
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    box-shadow: 0 10px 40px var(--shadow);
+}
+body.home .sheet { margin-top: clamp(0rem, 12vw, 9rem); }
+
+/* ---------- Page header ---------- */
+.hero { padding: clamp(2rem, 5vw, 3.25rem) 0 clamp(1.25rem, 3vw, 2rem); }
+.hero .kicker {
+    margin: 0 0 0.4rem;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+.hero h1 { margin: 0; font-weight: 900; font-size: clamp(2rem, 5vw, 2.9rem); }
+.hero .sub { margin: 0.5rem 0 0; font-size: 1.2rem; font-style: italic; color: var(--muted); max-width: 40rem; }
+
+body.home .hero { padding-top: clamp(3rem, 8vw, 5.5rem); padding-bottom: clamp(2rem, 5vw, 3rem); }
+body.home .hero h1 { font-size: clamp(2.6rem, 7vw, 4.2rem); }
+body.home .hero .sub { font-size: clamp(1.2rem, 2.2vw, 1.4rem); }
+body.home .hero::after {
+    content: "";
+    display: block;
+    width: 8rem;
+    margin-top: 1.5rem;
+    border-top: 3px solid var(--ochre);
+}
+
+main > section + section { margin-top: 3rem; }
+main h2 { font-size: 2rem; margin: 0 0 0.75rem; color: var(--accent); }
+.lede { margin: -0.25rem 0 1.25rem; color: var(--muted); }
+
+/* ---------- Schedule ---------- */
+ol.schedule { list-style: none; padding: 0; margin: 0; }
+.topic {
+    display: grid;
+    grid-template-columns: var(--date-column) 1fr;
+    gap: 0.9rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--rule);
+}
+.topic .date {
+    padding-top: 0.2rem;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    text-align: right;
+}
+.topic .title { font-size: 1.15rem; font-weight: 600; }
+.topic .event {
+    margin-left: 0.6rem;
+    padding: 0.05rem 0.5rem;
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    vertical-align: 0.15em;
+    color: var(--bar-text);
+    background: var(--accent);
+    border-radius: 999px;
+}
+.topic .reading { display: block; font-size: 1rem; font-style: italic; color: var(--muted); }
+.topic .chips { margin-top: 0.4rem; }
+
+/* ---------- Chips (links to materials) ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+a.chip {
+    padding: 0.15rem 0.7rem;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+}
+a.chip:hover { border-color: var(--accent); color: var(--accent); }
+a.chip::before { margin-right: 0.35rem; color: var(--accent); }
+a.chip.homework::before { content: "Homework ·"; }
+a.chip.exam::before { content: "Exam ·"; }
+
+/* ---------- Index cards ---------- */
+ul.cards {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+    gap: 1rem;
+}
+a.card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    height: 100%;
+    padding: 1rem 1.1rem 0.9rem;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    color: var(--ink);
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+a.card:hover { color: var(--ink); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(58, 42, 30, 0.15); }
+.card .label {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+.card .title { font-family: var(--display); font-weight: 700; font-size: 1.4rem; line-height: 1.15; }
+
+/* ---------- Homework and exam pages ---------- */
+article.paper {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    padding: clamp(1rem, 4vw, 2.5rem);
+}
+article.paper > :first-child { margin-top: 0; }
+
+p.instructions { font-style: italic; color: var(--muted); margin: 1.5rem 0 0.75rem; }
+
+ol.questions { padding-left: 2rem; margin: 0; }
+ol.questions > li { margin: 0 0 1.1rem; padding-left: 0.3rem; break-inside: avoid; }
+ol.questions > li::marker { font-family: var(--sans); font-weight: 600; font-size: 0.9em; color: var(--accent); }
+ol.questions > li > p { margin: 0 0 0.3rem; }
+ol.options { margin: 0; padding-left: 1.6rem; }
+ol.options li { margin: 0.1rem 0; }
+ol.options li::marker { color: var(--muted); }
+
+/* Demand and supply schedules */
+.table-wrap { overflow-x: auto; }
+table.schedule-table { border-collapse: collapse; margin: 0.75rem 0 1.25rem; font-size: 1rem; background: var(--card); }
+table.schedule-table caption {
+    caption-side: top;
+    text-align: left;
+    padding-bottom: 0.3rem;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+table.schedule-table th, table.schedule-table td { border: 1px solid var(--rule); padding: 0.3rem 0.6rem; text-align: center; }
+table.schedule-table th { background: var(--paper); font-family: var(--sans); font-size: 0.85rem; font-weight: 600; text-align: left; }
+
+/* ---------- Footer ---------- */
+.site-footer {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding: 1.5rem clamp(1rem, 4vw, 2.5rem) 2.5rem;
+    font-size: 1rem;
+    font-style: italic;
+    color: var(--bar-text);
+    text-align: center;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+.site-footer p { margin: 0.25rem 0; }
+.site-footer .credit { font-size: 0.9rem; }
+.site-footer a { color: var(--bar-text); }
+
+/* ---------- Small screens ---------- */
+@media (max-width: 40rem) {
+    :root { --base-size: 1.1rem; --date-column: 3.5rem; }
+    .site-nav .links { font-size: 0.78rem; }
+}
