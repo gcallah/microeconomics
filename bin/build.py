@@ -44,7 +44,7 @@ SECTIONS = {"homework": HOMEWORK, "exams": EXAMS}
 
 TEXTBOOK = ("Paul Heyne, Peter Boettke and David Prychitko, "
             "<cite>The Economic Way of Thinking</cite>")
-PENCIL = ('<a href="https://fee.org/resources/i-pencil/">Leonard Read, '
+PENCIL = ('<a href="https://fee.org/ebooks/i-pencil">Leonard Read, '
           '&ldquo;I, Pencil&rdquo;</a>')
 
 # The Spring 2013 class schedule. "ch" is the textbook chapter to read; each
