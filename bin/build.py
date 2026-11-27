@@ -61,7 +61,7 @@ TOPICS = [
     {"date": "Feb 22", "title": "How do market demand and supply interact?", "ch": 5},
     {"date": "Feb 26", "title": "Applications of demand and supply analysis", "ch": 6,
      "homework": ["elasticity-homework"]},
-    {"date": "Feb 29", "title": "More applications", "ch": 6},
+    {"date": "Mar 1", "title": "More applications", "ch": 6},
     {"date": "Mar 5", "title": "Profit and loss", "ch": 7},
     {"date": "Mar 8", "title": "Competition and monopoly", "ch": 8, "event": "Quiz 2"},
     {"date": "Mar 12", "title": "Competition and monopoly, continued", "ch": 8},
